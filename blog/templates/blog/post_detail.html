@@ -1,0 +1,62 @@
+{% extends 'blog/base.html' %}
+
+{% block content %}
+
+<div class="detail-section">
+    {% if obj_type == "character" %}
+
+    <div class="formulaire">
+        <h1>
+            <a href="/">{{ character.id_character }}</a>
+        </h1>
+        <form method="POST" class="post-form">{% csrf_token %}
+            <br><b> Changer de lieu : </b><br>
+            {{ form.lieu }}
+            <button type="submit" class="btn btn-outline-light">OK</button>
+        </form>
+    </div>
+
+    {% if message != '' %}
+        <div class="alert alert-danger" role="alert">
+            {{ message }}
+        </div>
+    {% endif %}
+
+    <div class="character-detail detail-card">
+        <h2>{{ obj.id_character }}</h2>
+        <div class="detail-img">
+            <img src="{{ obj.photo }}" alt="Photo de {{ obj.id_character }}">
+        </div>
+        <div class="detail-attributes">
+            <p><strong>État :</strong> {{ obj.etat }}</p>
+            <p><strong>Équipe :</strong> {{ obj.team }}</p>
+            <p><strong>Où me trouver :</strong>
+                <a href="{% url 'post_detail' 'equipement' obj.lieu.pk %}">{{ obj.lieu.id_equip }}</a>
+            </p>
+        </div>
+    </div>
+
+
+    {% elif obj_type == "equipement" %}
+    <div class="equipement-detail detail-card">
+        <h2>{{ obj.id_equip }}</h2>
+        <div class="detail-img">
+            <img src="{{ obj.photo }}" alt="Photo de {{ obj.id_equip }}">
+        </div>
+        <div class="detail-attributes">
+            <p><strong>Disponibilité :</strong> {{ obj.disponibilite }}</p>
+            {% if obj.disponibilite == "occupé" %}
+                <p><strong>Occupé par :</strong> 
+                    {% with character=obj.character_set.first %}
+                        {{ character.id_character }}
+                    {% endwith %}
+                </p>
+            {% endif %}
+        </div>
+    </div>
+    {% endif %}
+</div>
+
+
+
+{% endblock %}

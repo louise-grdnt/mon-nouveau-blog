@@ -1,0 +1,17 @@
+{% extends 'blog/base.html' %}
+
+{% block content %}
+
+<div class="page-header">
+    <h1>
+        <a href="/">{{ character.id_character }}</a>
+    </h1>
+    <form method="POST" class="post-form">{% csrf_token %}
+        <b> Changer : </b> {{ form.as_ul }}
+        <button type="submit" class="btn btn-outline-light">OK</button>
+        <a href="{% url 'character_list' %}">Back</a>
+    </form>
+</div>
+ 
+ 
+{% endblock %}

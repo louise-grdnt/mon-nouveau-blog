@@ -1,0 +1,28 @@
+{% load static %} 
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Les Grimpeurs au sommet</title>
+        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css"> 
+        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+        <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,100..700;1,100..700&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Overpass:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet" type="text/css">
+        <link href="https://fonts.googleapis.com/css2?family=Cookie&display=swap" rel="stylesheet" type="text/css">
+        <link rel="stylesheet" href="{% static 'css/blog.css' %}">
+    </head>
+    <body>
+        <div class="page-header text-center">
+            <h1><a href="/">Les Grimpeurs au sommet</a></h1>
+            <h4>Un site par Louise Gardiennet</h4>
+        </div>
+        <div class="content container">
+            <div class="row">
+                <div class="col-md-8 col-md-offset-2">
+                    {% block content %}
+                    <a href="{% url 'post_detail' id_character=character.id_character %}">{{ character.id_character }}</a>
+                    {% endblock %}
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
